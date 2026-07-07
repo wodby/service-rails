@@ -1,0 +1,56 @@
+name: rails
+type: service
+from: ruby
+fromVersionConstraint: "^1.0.0"
+fromVersion: "1.0.0"
+icon: rails
+title: Rails
+labels:
+- rails
+- ruby
+
+env:
+- name: SECRET_KEY_BASE
+  value: '{{secret_key_base}}'
+  secret: true
+- name: RAILS_ENV
+  value: development
+  envType: dev
+
+tokens:
+- name: secret_key_base
+  generate:
+    regex: '[0-9a-f]{64}'
+
+derivatives:
+- name: rails-sidekiq
+  icon: rails
+  title: Sidekiq
+  args: ['bundle', 'exec', 'sidekiq']
+  type: service
+  default: true
+  required: false
+
+build:
+  dockerfile: Dockerfile
+  connect: true
+
+actions:
+- name: database_migrate
+  title: Run migrate
+  args:
+  - bundle
+  - exec
+  - rails
+  - db:migrate
+  type: post_deploy
+- name: database_seed
+  title: Seed database
+  depends:
+  - database_migrate
+  args:
+  - bundle
+  - exec
+  - rails
+  - db:seed
+  type: post_deploy_once
