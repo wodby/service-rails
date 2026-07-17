@@ -3,8 +3,7 @@ type: service
 from: ruby
 fromVersionConstraint: "^1.0.0"
 fromVersion: "1.0.1"
-icon: rails
-title: Rails
+title: Ruby (Rails)
 labels:
 - rails
 - ruby
