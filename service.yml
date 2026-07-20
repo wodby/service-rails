@@ -33,6 +33,11 @@ derivatives:
 build:
   dockerfile: Dockerfile
   connect: true
+  templates:
+  - name: rails
+    title: Rails boilerplate
+    repo: https://github.com/wodby/rails-boilerplate
+    branch: main
 
 actions:
 - name: database_migrate
