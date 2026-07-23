@@ -23,7 +23,7 @@ tokens:
 
 derivatives:
 - name: rails-sidekiq
-  icon: rails
+  icon: sidekiq
   title: Sidekiq
   args: ['bundle', 'exec', 'sidekiq']
   type: service
