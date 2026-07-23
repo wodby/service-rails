@@ -16,6 +16,12 @@ env:
   value: development
   envType: dev
 
+configs:
+- name: host-authorization
+  title: Host authorization
+  config: wodby_host_authorization.rb
+  filepath: /usr/src/app/config/initializers/wodby_host_authorization.rb
+
 tokens:
 - name: secret_key_base
   generate:

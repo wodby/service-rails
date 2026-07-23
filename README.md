@@ -28,7 +28,7 @@ compatible build configuration and Wodby CI:
 | Type | Application service |
 | Inherits from | [`ruby`](https://github.com/wodby/service-ruby) with version constraint `^1.0.0` |
 | Application build | Git source connection enabled; Dockerfile: `Dockerfile`; starters: Rails boilerplate |
-| Configuration | 1 generated or fixed tokens |
+| Configuration | 1 configuration files, 1 generated or fixed tokens |
 | Operations | 2 actions |
 
 ## Use this service
