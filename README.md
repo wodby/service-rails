@@ -40,6 +40,14 @@ A service is a reusable component and does not deploy by itself. The stack
 defines its links, settings, versions, resources, and relationship to the rest
 of the application.
 
+## Background jobs
+
+The `rails-sidekiq` derivative is selected by default. The standard Rails stack
+also makes Valkey required and supplies its persistent connection through
+`REDIS_URL`, which Sidekiq reads automatically. The component `REDIS_HOST`,
+`REDIS_PORT`, and `REDIS_PASSWORD` variables remain available for applications
+that configure their client explicitly.
+
 ## Maintain a custom version
 
 1. Fork this repository.

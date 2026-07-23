@@ -15,6 +15,33 @@ env:
 - name: RAILS_ENV
   value: development
   envType: dev
+- name: RAILS_ENV
+  value: production
+  envType: prod
+- name: RAILS_ENV
+  value: production
+  envType: staging
+- name: RAILS_ENV
+  value: production
+  envType: test
+- name: RAILS_ENV
+  value: production
+  envType: feature
+links:
+- name: redis
+  title: Redis
+  required: true
+  env:
+  - name: REDIS_URL
+    value: 'redis://:{{link.tokens.password}}@{{link.host}}:{{link.port}}/0'
+    secret: true
+  selectors:
+  - type: datastore
+    labels:
+    - redis
+  - type: datastore
+    labels:
+    - valkey
 
 configs:
 - name: host-authorization
@@ -47,12 +74,12 @@ build:
 
 actions:
 - name: database_migrate
-  title: Run migrate
+  title: Prepare database
   args:
   - bundle
   - exec
   - rails
-  - db:migrate
+  - db:prepare
   type: post_deploy
 - name: database_seed
   title: Seed database
