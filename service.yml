@@ -66,7 +66,7 @@ derivatives:
 build:
   dockerfile: Dockerfile
   connect: true
-  templates:
+  boilerplates:
   - name: rails
     title: Rails boilerplate
     repo: https://github.com/wodby/rails-boilerplate
