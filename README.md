@@ -40,6 +40,13 @@ A service is a reusable component and does not deploy by itself. The stack
 defines its links, settings, versions, resources, and relationship to the rest
 of the application.
 
+The inherited database link keeps the component `DB_*` variables for
+compatibility and also supplies a secret `DATABASE_URL`. Rails treats that URL
+as the authoritative connection for deployment tasks, so `db:prepare` targets
+only the provisioned application database. The separate `test` configuration
+in `database.yml` remains available to explicit test runs when `DATABASE_URL`
+is not set.
+
 ## Background jobs
 
 The `rails-sidekiq` derivative is selected by default. The standard Rails stack
@@ -47,6 +54,12 @@ also makes Valkey required and supplies its persistent connection through
 `REDIS_URL`, which Sidekiq reads automatically. The component `REDIS_HOST`,
 `REDIS_PORT`, and `REDIS_PASSWORD` variables remain available for applications
 that configure their client explicitly.
+
+The injected host-authorization initializer trusts Wodby's JSON
+`WODBY_HOSTS` route list and the internal `WODBY_APP_SERVICE_NAME`, while
+excluding `/healthz` so Kubernetes probes do not require a public host header.
+Boilerplate applications also consume the inherited `SMTP_HOST` and
+`SMTP_PORT` link variables for Action Mailer.
 
 ## Maintain a custom version
 

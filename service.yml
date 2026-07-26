@@ -28,6 +28,11 @@ env:
   value: production
   envType: feature
 links:
+- name: db
+  env:
+  - name: DATABASE_URL
+    value: '{{link.database.url}}'
+    secret: true
 - name: redis
   title: Redis
   required: true
