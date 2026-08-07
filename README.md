@@ -49,11 +49,13 @@ is not set.
 
 ## Background jobs
 
-The `rails-sidekiq` derivative is selected by default. The standard Rails stack
-also makes Valkey required and supplies its persistent connection through
-`REDIS_URL`, which Sidekiq reads automatically. The component `REDIS_HOST`,
-`REDIS_PORT`, and `REDIS_PASSWORD` variables remain available for applications
-that configure their client explicitly.
+The Redis link and `rails-sidekiq` derivative are optional for custom stacks.
+Applications that do not enqueue background jobs can omit both. The standard
+Rails stack explicitly selects the Sidekiq derivative, makes Valkey required,
+and supplies its persistent connection through `REDIS_URL`, which Sidekiq
+reads automatically. The component `REDIS_HOST`, `REDIS_PORT`, and
+`REDIS_PASSWORD` variables remain available for applications that configure
+their client explicitly.
 
 The injected host-authorization initializer trusts Wodby's JSON
 `WODBY_HOSTS` route list and the internal `WODBY_APP_SERVICE_NAME`, while

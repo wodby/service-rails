@@ -35,7 +35,6 @@ links:
     secret: true
 - name: redis
   title: Redis
-  required: true
   env:
   - name: REDIS_URL
     value: 'redis://:{{link.tokens.password}}@{{link.host}}:{{link.port}}/0'
@@ -65,7 +64,6 @@ derivatives:
   title: Sidekiq
   args: ['bundle', 'exec', 'sidekiq']
   type: service
-  default: true
   required: false
 
 build:
