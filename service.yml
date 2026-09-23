@@ -1,14 +1,16 @@
 name: rails
 type: service
 from: ruby
-fromVersionConstraint: "^1.0.0"
-fromVersion: "1.1.9"
+fromVersionConstraint: "^1.2.0"
+fromVersion: "1.2.0"
 title: Ruby (Rails)
 labels:
 - rails
 - ruby
 
 env:
+- name: WORKSPACE_RUBY_COMMAND
+  value: 'bundle exec rails server --binding "$HOST" --port "$PORT"'
 - name: SECRET_KEY_BASE
   value: '{{secret_key_base}}'
   secret: true

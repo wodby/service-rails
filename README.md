@@ -81,3 +81,9 @@ wodby service validate-manifest service.yml --org <org-id>
 ```
 
 See the [service manifest reference](https://wodby.com/docs/2.0/services/template/) and the [managed services index](https://github.com/wodby/services).
+
+## Development workspaces
+
+The Ruby workspace runtime starts Rails in development with frozen Bundler dependencies. Configure `config.file_watcher = ActiveSupport::FileUpdateChecker` for shared storage; otherwise restart the application after edits. Override `WORKSPACE_RUBY_COMMAND` for custom startup. Disable code derivatives for workspaces. Database preparation and seeds remain explicit actions.
+
+Requires a runtime image declaring workspace contract version 1. Ordinary and development option tags must use matching revisions.
