@@ -10,6 +10,10 @@ wodby_hosts << wodby_service_host if wodby_service_host && !wodby_hosts.include?
 # Health probes do not carry a public Host header, so keep that endpoint out of
 # host authorization.
 unless wodby_hosts.empty?
+  # The container's readiness check requests the app from inside the container
+  # as "localhost"; without this entry it is refused and the app never becomes
+  # ready.
+  wodby_hosts << "localhost" unless wodby_hosts.include?("localhost")
   Rails.application.config.hosts.concat(wodby_hosts).uniq!
   Rails.application.config.host_authorization = {
     exclude: ->(request) { request.path == "/healthz" }
