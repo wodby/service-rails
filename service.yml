@@ -2,7 +2,7 @@ name: rails
 type: service
 from: ruby
 fromVersionConstraint: "^1.0.0"
-fromVersion: "1.2.2"
+fromVersion: "1.2.3"
 guidance: GUIDANCE.md
 title: Ruby (Rails)
 labels:
