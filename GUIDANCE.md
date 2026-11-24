@@ -36,10 +36,10 @@ Do not add the environment's hosts to `config.hosts` in the code. Serve the heal
 
 The service's Dockerfile installs `vips`, runs `bundle install`, and runs `rails assets:precompile` with `RAILS_ENV=production` and a dummy secret key when the application has that task. The runtime variables and the database are not available during the build.
 
-## After a deployment
+## Database preparation
 
-1. `bundle exec rails db:prepare` runs after every deployment of the service. It prepares the linked database: schema and pending migrations.
-2. `bundle exec rails db:seed` runs after it, during the first deployment only.
+1. `bundle exec rails db:prepare` runs on every deployment of the service, in a job of the new version, before its pods are replaced. On the first deployment it runs right after the install. It prepares the linked database: schema and pending migrations. If it fails, the deployment stops before the rollout. The previous version keeps serving until the new one is ready, and keeps serving if the deployment fails, so migrations must keep working with the previous version: add columns and tables first, remove or rename them in a later release.
+2. `bundle exec rails db:seed` runs after the rollout, during the first deployment only.
 
 The start command and the pipeline do not have to run migrations.
 
